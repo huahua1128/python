@@ -1,0 +1,15 @@
+.....F
+======================================================================
+FAIL: test_two_positive_sub (zgh.unittest_test.test_math_method_2.TestSub)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\ZGH\test\zgh\unittest_test\test_math_method_2.py", line 14, in test_two_positive_sub
+    raise   e
+  File "E:\ZGH\test\zgh\unittest_test\test_math_method_2.py", line 11, in test_two_positive_sub
+    self.assertEqual(expected,result)
+AssertionError: 11 != 1
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+FAILED (failures=1)

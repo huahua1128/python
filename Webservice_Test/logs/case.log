@@ -1,0 +1,16 @@
+
+2019-03-06 12:33:24,915-sendcode-ERROR-:第5条测试用例执行的结果是：FAIL  -[test_A_sendcode.py:67]
+2019-03-06 12:33:24,915-sendcode-ERROR-:执行失败！期望结果是：{'msg': '用户IP错误'}，实际结果是：(result){
+   retCode = "0"
+   retInfo = "ok"
+ }  -[test_A_sendcode.py:68]
+2019-03-06 12:36:56,225-sendcode-ERROR-:第5条测试用例执行的结果是：FAIL  -[test_A_sendcode.py:67]
+2019-03-06 12:36:56,225-sendcode-ERROR-:执行失败！期望结果是：{'msg': '用户IP错误'}，实际结果是：(result){
+   retCode = "0"
+   retInfo = "ok"
+ }  -[test_A_sendcode.py:68]
+2019-03-06 12:38:24,805-register-ERROR-:第18条测试用例执行的结果是：FAIL  -[test_B_userRgister.py:87]
+2019-03-06 12:38:24,805-register-ERROR-:执行失败！期望结果是：{'msg': '短信验证码已丢失'}，实际结果是：(commResult){
+   retCode = "0"
+   retInfo = "ok"
+ }  -[test_B_userRgister.py:88]

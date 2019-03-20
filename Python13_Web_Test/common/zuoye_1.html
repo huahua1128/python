@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title id="ww">我的登录网页</title>
+</head>
+<body>
+<form onsubmit="alert('user_name: '+this.user.value+'\n'+'password: '+this.pwd.value)">
+    <h2>登录页面</h2>
+    
+    <div>用户名：
+        <input type="text" name="user" size="16">
+    </div>
+
+    <div>密码：
+        <input type="password" name="pwd" size="16">
+    </div>
+
+    <div>性别：
+        <input type="radio" value="男" name="sex">男
+        <input type="radio" value="女" name="sex">女
+    </div>
+    
+    <div>头像：
+        <input type="file">
+
+    </div>
+
+    <div>住址：
+        <select>
+            <option name="sheng1">四川</option>
+            <option name="sheng2">陕西</option>
+            <option name="sheng3">江苏</option>
+        </select>
+            <span>省&nbsp&nbsp&nbsp</span>
+        <select>
+            <option name="sheng1">成都</option>
+            <option name="sheng1">西安</option>
+            <option name="sheng1">扬州</option>
+        </select>
+            <span>市&nbsp&nbsp&nbsp</span>
+    </div>
+
+    <div>爱好：
+        <input type="checkbox" value="篮球" name="hobby">篮球
+        <input type="checkbox" value="足球" name="hobby">足球
+        <input type="checkbox" value="看书" name="hobby">看书
+    </div>
+
+    <div>备注信息：
+        <textarea rows="6" cols="20">这是我的第一个网页</textarea>
+    </div>
+    <div>
+        <input type="submit" value="提交">
+        <input type="reset" value="重置">
+    </div>
+</form>
+</body>
+</html>

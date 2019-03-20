@@ -1,0 +1,964 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>接口测试报告</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 120%; }
+table       { font-size: 100%; }
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+</style>
+
+</head>
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+/*level 调整增加只显示通过用例的分类 --Findyou
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:All     //pt none, ft none
+*/
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+    }
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+	//console.log(detail_class.length)
+	if (level == 3) {
+		for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="收起"
+		}
+	}
+	else{
+			for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="详细"
+		}
+	}
+}
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "详细"
+        }
+        else {
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "收起"
+        }
+    }
+}
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+</script>
+<div class='heading'>
+<h1 style="font-family: Microsoft YaHei">接口测试报告</h1>
+<p class='attribute'><strong>测试人员 : </strong> 花花</p>
+<p class='attribute'><strong>开始时间 : </strong> 2019-03-06 12:36:54</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:01:35.360133</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 46，通过 44，失败 2，通过率= 95.65%</p>
+
+<p class='description'>关于webservice的接口测试报告</p>
+</div>
+
+
+<p id='show_detail_line'>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 95.65% }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 2 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 44 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 46 }</a>
+</p>
+<table id='result_table' class="table table-condensed table-bordered table-hover">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 16px;">
+    <td>用例集/测试用例</td>
+    <td>总计</td>
+    <td>通过</td>
+    <td>失败</td>
+    <td>错误</td>
+    <td>详细</td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>test_A_sendcode.TestSendCode</td>
+    <td class="text-center">12</td>
+    <td class="text-center">11</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',12)" class="detail" id='c1'>详细</a></td>
+</tr>
+
+<tr id='pt1_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_code_01_向已注册的手机号码发送验证码</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt1_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_code_02_ip地址为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_2'>通过</button>
+    <div id='div_pt1_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_2'>通过</button>
+    <div id='div_pt1_2' class="collapse in" align="left">
+    <pre>
+    
+pt1_2: &lt;suds.sax.document.Document object at 0x039B3B50&gt;
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_code_03_短信模板为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_3'>通过</button>
+    <div id='div_pt1_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_3'>通过</button>
+    <div id='div_pt1_3' class="collapse in" align="left">
+    <pre>
+    
+pt1_3: &lt;suds.sax.document.Document object at 0x038B6850&gt;
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_code_04_手机号码为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_4'>通过</button>
+    <div id='div_pt1_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_4'>通过</button>
+    <div id='div_pt1_4' class="collapse in" align="left">
+    <pre>
+    
+pt1_4: &lt;suds.sax.document.Document object at 0x03BC2310&gt;
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_5' class='none'>
+    <td class='failCase'><div class='testcase'>test_send_code_05_ip地址错误</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_5'>失败</button>
+    <div id='div_ft1_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_5'>失败</button>
+    <div id='div_ft1_5' class="collapse in" align="left">
+    <pre>
+    
+ft1_5: Traceback (most recent call last):
+  File "E:\ZGH\Webservice_Test\libext\ddt.py", line 154, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\ZGH\Webservice_Test\test_cases\test_A_sendcode.py", line 69, in test_send_code
+    raise e
+  File "E:\ZGH\Webservice_Test\test_cases\test_A_sendcode.py", line 54, in test_send_code
+    self.assertIn(case.expected["msg"], msg)  # 结果断言
+AssertionError: '用户IP错误' not found in ok
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_code_06_短信模板为其他数字</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_6'>通过</button>
+    <div id='div_pt1_6' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_6'>通过</button>
+    <div id='div_pt1_6' class="collapse in" align="left">
+    <pre>
+    
+pt1_6: &lt;suds.sax.document.Document object at 0x0396A710&gt;
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_code_07_短信模板为非数字</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_7'>通过</button>
+    <div id='div_pt1_7' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_7'>通过</button>
+    <div id='div_pt1_7' class="collapse in" align="left">
+    <pre>
+    
+pt1_7: &lt;suds.sax.document.Document object at 0x03BD2290&gt;
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_code_08_手机号码位数为12位</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_8'>通过</button>
+    <div id='div_pt1_8' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_8'>通过</button>
+    <div id='div_pt1_8' class="collapse in" align="left">
+    <pre>
+    
+pt1_8: &lt;suds.sax.document.Document object at 0x03C0B490&gt;
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_code_09_手机号码位数为9位</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_9'>通过</button>
+    <div id='div_pt1_9' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_9'>通过</button>
+    <div id='div_pt1_9' class="collapse in" align="left">
+    <pre>
+    
+pt1_9: &lt;suds.sax.document.Document object at 0x03965550&gt;
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_code_10_改变ip地址发送验证码</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt1_11' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_code_11_向未注册的手机号发送短信验证码</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt1_12' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_code_12_向同一个号码发起多次验证码请求</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_12' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_12'>通过</button>
+    <div id='div_pt1_12' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_12' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_12'>通过</button>
+    <div id='div_pt1_12' class="collapse in" align="left">
+    <pre>
+    
+pt1_12: &lt;suds.sax.document.Document object at 0x039A2EF0&gt;
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>test_B_userRgister.TestUserRegister</td>
+    <td class="text-center">18</td>
+    <td class="text-center">17</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c2',18)" class="detail" id='c2'>详细</a></td>
+</tr>
+
+<tr id='pt2_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_01_参数正常注册</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_02_验证码为空注册</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_03_用户名为空注册</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_04_手机号为空注册</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_05_渠道信息为空注册</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_06_登陆密码为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_07_ip地址为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_08_注册已经被注册过的手机号</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_09_输入错误的验证码</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_10_输入非数字的验证码</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_11' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_11_渠道信息为1注册</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_12' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_12_渠道信息为3注册</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_13' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_13_用户名重复时注册</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_14' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_14_输入错误的手机号长度</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_15' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_15_渠道信息为非规定数字</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_16' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_16_渠道信息为非纯数字的时候</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_17' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_17_密码含有特殊字符</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft2_18' class='none'>
+    <td class='failCase'><div class='testcase'>test_user_register_18_验证码超过一分钟注册</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft2_18' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft2_18'>失败</button>
+    <div id='div_ft2_18' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft2_18' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft2_18'>失败</button>
+    <div id='div_ft2_18' class="collapse in" align="left">
+    <pre>
+    
+ft2_18: Traceback (most recent call last):
+  File "E:\ZGH\Webservice_Test\libext\ddt.py", line 154, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\ZGH\Webservice_Test\test_cases\test_B_userRgister.py", line 89, in test_user_register
+    raise e
+  File "E:\ZGH\Webservice_Test\test_cases\test_B_userRgister.py", line 69, in test_user_register
+    self.assertIn(case.expected["msg"], msg)  # 结果断言
+AssertionError: '短信验证码已丢失' not found in ok
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_C_verifyUserAuth.TestVerifiedUserAuth</td>
+    <td class="text-center">16</td>
+    <td class="text-center">16</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c3',16)" class="detail" id='c3'>详细</a></td>
+</tr>
+
+<tr id='pt3_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_verified_user_auth_01_参数正常认证</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_1'>通过</button>
+    <div id='div_pt3_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_1'>通过</button>
+    <div id='div_pt3_1' class="collapse in" align="left">
+    <pre>
+    
+pt3_1: --- Logging error ---
+Traceback (most recent call last):
+  File "D:\Program_Files\python_3.4.0\lib\logging\__init__.py", line 955, in emit
+    msg = self.format(record)
+  File "D:\Program_Files\python_3.4.0\lib\logging\__init__.py", line 812, in format
+    return fmt.format(record)
+  File "D:\Program_Files\python_3.4.0\lib\logging\__init__.py", line 550, in format
+    record.message = record.getMessage()
+  File "D:\Program_Files\python_3.4.0\lib\logging\__init__.py", line 313, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "E:/ZGH/Webservice_Test/run.py", line 12, in &lt;module&gt;
+    runner.run(discover)
+  File "E:\ZGH\Webservice_Test\libext\HTMLTestRunnerNew.py", line 541, in run
+    test(result)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 87, in __call__
+    return self.run(*args, **kwds)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 125, in run
+    test(result)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 87, in __call__
+    return self.run(*args, **kwds)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 125, in run
+    test(result)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 87, in __call__
+    return self.run(*args, **kwds)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 125, in run
+    test(result)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\case.py", line 622, in __call__
+    return self.run(*args, **kwds)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\case.py", line 574, in run
+    testMethod()
+  File "E:\ZGH\Webservice_Test\libext\ddt.py", line 154, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\ZGH\Webservice_Test\test_cases\test_C_verifyUserAuth.py", line 49, in test_verified_user_auth
+    self.logger.info("***********",getattr(context.Context, 'uid'))
+Message: '***********'
+Arguments: ('100006386',)
+610100 &lt;class 'str'&gt;
+1997 &lt;class 'str'&gt;
+09 &lt;class 'str'&gt;
+28 &lt;class 'str'&gt;
+657 &lt;class 'str'&gt;
+365
+2
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_verified_user_auth_02_改变真实姓名为4位注册</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_2'>通过</button>
+    <div id='div_pt3_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_2'>通过</button>
+    <div id='div_pt3_2' class="collapse in" align="left">
+    <pre>
+    
+pt3_2: --- Logging error ---
+Traceback (most recent call last):
+  File "D:\Program_Files\python_3.4.0\lib\logging\__init__.py", line 955, in emit
+    msg = self.format(record)
+  File "D:\Program_Files\python_3.4.0\lib\logging\__init__.py", line 812, in format
+    return fmt.format(record)
+  File "D:\Program_Files\python_3.4.0\lib\logging\__init__.py", line 550, in format
+    record.message = record.getMessage()
+  File "D:\Program_Files\python_3.4.0\lib\logging\__init__.py", line 313, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "E:/ZGH/Webservice_Test/run.py", line 12, in &lt;module&gt;
+    runner.run(discover)
+  File "E:\ZGH\Webservice_Test\libext\HTMLTestRunnerNew.py", line 541, in run
+    test(result)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 87, in __call__
+    return self.run(*args, **kwds)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 125, in run
+    test(result)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 87, in __call__
+    return self.run(*args, **kwds)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 125, in run
+    test(result)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 87, in __call__
+    return self.run(*args, **kwds)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 125, in run
+    test(result)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\case.py", line 622, in __call__
+    return self.run(*args, **kwds)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\case.py", line 574, in run
+    testMethod()
+  File "E:\ZGH\Webservice_Test\libext\ddt.py", line 154, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\ZGH\Webservice_Test\test_cases\test_C_verifyUserAuth.py", line 49, in test_verified_user_auth
+    self.logger.info("***********",getattr(context.Context, 'uid'))
+Message: '***********'
+Arguments: ('100006387',)
+510107 &lt;class 'str'&gt;
+1998 &lt;class 'str'&gt;
+11 &lt;class 'str'&gt;
+23 &lt;class 'str'&gt;
+493 &lt;class 'str'&gt;
+291
+5
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_verified_user_auth_03_改变真实姓名为1位注册</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_3'>通过</button>
+    <div id='div_pt3_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_3'>通过</button>
+    <div id='div_pt3_3' class="collapse in" align="left">
+    <pre>
+    
+pt3_3: --- Logging error ---
+Traceback (most recent call last):
+  File "D:\Program_Files\python_3.4.0\lib\logging\__init__.py", line 955, in emit
+    msg = self.format(record)
+  File "D:\Program_Files\python_3.4.0\lib\logging\__init__.py", line 812, in format
+    return fmt.format(record)
+  File "D:\Program_Files\python_3.4.0\lib\logging\__init__.py", line 550, in format
+    record.message = record.getMessage()
+  File "D:\Program_Files\python_3.4.0\lib\logging\__init__.py", line 313, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "E:/ZGH/Webservice_Test/run.py", line 12, in &lt;module&gt;
+    runner.run(discover)
+  File "E:\ZGH\Webservice_Test\libext\HTMLTestRunnerNew.py", line 541, in run
+    test(result)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 87, in __call__
+    return self.run(*args, **kwds)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 125, in run
+    test(result)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 87, in __call__
+    return self.run(*args, **kwds)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 125, in run
+    test(result)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 87, in __call__
+    return self.run(*args, **kwds)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 125, in run
+    test(result)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\case.py", line 622, in __call__
+    return self.run(*args, **kwds)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\case.py", line 574, in run
+    testMethod()
+  File "E:\ZGH\Webservice_Test\libext\ddt.py", line 154, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\ZGH\Webservice_Test\test_cases\test_C_verifyUserAuth.py", line 49, in test_verified_user_auth
+    self.logger.info("***********",getattr(context.Context, 'uid'))
+Message: '***********'
+Arguments: ('100006388',)
+360102 &lt;class 'str'&gt;
+1993 &lt;class 'str'&gt;
+08 &lt;class 'str'&gt;
+09 &lt;class 'str'&gt;
+982 &lt;class 'str'&gt;
+387
+2
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_verified_user_auth_04_用户Uid为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_4'>通过</button>
+    <div id='div_pt3_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_4'>通过</button>
+    <div id='div_pt3_4' class="collapse in" align="left">
+    <pre>
+    
+pt3_4: 210600 &lt;class 'str'&gt;
+1991 &lt;class 'str'&gt;
+07 &lt;class 'str'&gt;
+29 &lt;class 'str'&gt;
+785 &lt;class 'str'&gt;
+347
+6
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_verified_user_auth_05_真实姓名为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_5'>通过</button>
+    <div id='div_pt3_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_5'>通过</button>
+    <div id='div_pt3_5' class="collapse in" align="left">
+    <pre>
+    
+pt3_5: 610112 &lt;class 'str'&gt;
+2000 &lt;class 'str'&gt;
+02 &lt;class 'str'&gt;
+14 &lt;class 'str'&gt;
+705 &lt;class 'str'&gt;
+190
+3
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_verified_user_auth_06_身份证号为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_verified_user_auth_07_用户Uid非纯数字</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_7'>通过</button>
+    <div id='div_pt3_7' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_7'>通过</button>
+    <div id='div_pt3_7' class="collapse in" align="left">
+    <pre>
+    
+pt3_7: 610100 &lt;class 'str'&gt;
+2004 &lt;class 'str'&gt;
+08 &lt;class 'str'&gt;
+14 &lt;class 'str'&gt;
+584 &lt;class 'str'&gt;
+254
+1
+&lt;suds.sax.document.Document object at 0x02FD8A50&gt;
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_verified_user_auth_08_用户Uid不存在(未注册)</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_8'>通过</button>
+    <div id='div_pt3_8' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_8'>通过</button>
+    <div id='div_pt3_8' class="collapse in" align="left">
+    <pre>
+    
+pt3_8: 210600 &lt;class 'str'&gt;
+2005 &lt;class 'str'&gt;
+03 &lt;class 'str'&gt;
+23 &lt;class 'str'&gt;
+455 &lt;class 'str'&gt;
+196
+9
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_verified_user_auth_09_真实姓名超过五位</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_9'>通过</button>
+    <div id='div_pt3_9' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_9'>通过</button>
+    <div id='div_pt3_9' class="collapse in" align="left">
+    <pre>
+    
+pt3_9: 152922 &lt;class 'str'&gt;
+1998 &lt;class 'str'&gt;
+04 &lt;class 'str'&gt;
+09 &lt;class 'str'&gt;
+583 &lt;class 'str'&gt;
+389
+4
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_verified_user_auth_10_真实姓名为字母和数字且小于五位</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_10' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_10'>通过</button>
+    <div id='div_pt3_10' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_10' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_10'>通过</button>
+    <div id='div_pt3_10' class="collapse in" align="left">
+    <pre>
+    
+pt3_10: 610112 &lt;class 'str'&gt;
+2005 &lt;class 'str'&gt;
+08 &lt;class 'str'&gt;
+01 &lt;class 'str'&gt;
+699 &lt;class 'str'&gt;
+270
+6
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_11' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_verified_user_auth_11_真实姓名中有字母数字且小于五位</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_11' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_11'>通过</button>
+    <div id='div_pt3_11' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_11' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_11'>通过</button>
+    <div id='div_pt3_11' class="collapse in" align="left">
+    <pre>
+    
+pt3_11: 150602 &lt;class 'str'&gt;
+2015 &lt;class 'str'&gt;
+06 &lt;class 'str'&gt;
+25 &lt;class 'str'&gt;
+962 &lt;class 'str'&gt;
+314
+6
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_12' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_verified_user_auth_12_真实姓名中有特殊字符且小于五位</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_12' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_12'>通过</button>
+    <div id='div_pt3_12' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_12' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_12'>通过</button>
+    <div id='div_pt3_12' class="collapse in" align="left">
+    <pre>
+    
+pt3_12: 152922 &lt;class 'str'&gt;
+2015 &lt;class 'str'&gt;
+01 &lt;class 'str'&gt;
+23 &lt;class 'str'&gt;
+760 &lt;class 'str'&gt;
+290
+4
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_13' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_verified_user_auth_13_身份证号码错误</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_14' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_verified_user_auth_14_身份证号码长度正确但含有字符和字母</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_15' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_verified_user_auth_15_身份证号码错误</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_16' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_verified_user_auth_16_用户id正确并存在但真实姓名和身份证号码对应且已经被其他号码注册</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_16' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_16'>通过</button>
+    <div id='div_pt3_16' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_16' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_16'>通过</button>
+    <div id='div_pt3_16' class="collapse in" align="left">
+    <pre>
+    
+pt3_16: --- Logging error ---
+Traceback (most recent call last):
+  File "D:\Program_Files\python_3.4.0\lib\logging\__init__.py", line 955, in emit
+    msg = self.format(record)
+  File "D:\Program_Files\python_3.4.0\lib\logging\__init__.py", line 812, in format
+    return fmt.format(record)
+  File "D:\Program_Files\python_3.4.0\lib\logging\__init__.py", line 550, in format
+    record.message = record.getMessage()
+  File "D:\Program_Files\python_3.4.0\lib\logging\__init__.py", line 313, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "E:/ZGH/Webservice_Test/run.py", line 12, in &lt;module&gt;
+    runner.run(discover)
+  File "E:\ZGH\Webservice_Test\libext\HTMLTestRunnerNew.py", line 541, in run
+    test(result)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 87, in __call__
+    return self.run(*args, **kwds)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 125, in run
+    test(result)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 87, in __call__
+    return self.run(*args, **kwds)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 125, in run
+    test(result)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 87, in __call__
+    return self.run(*args, **kwds)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\suite.py", line 125, in run
+    test(result)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\case.py", line 622, in __call__
+    return self.run(*args, **kwds)
+  File "D:\Program_Files\python_3.4.0\lib\unittest\case.py", line 574, in run
+    testMethod()
+  File "E:\ZGH\Webservice_Test\libext\ddt.py", line 154, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\ZGH\Webservice_Test\test_cases\test_C_verifyUserAuth.py", line 49, in test_verified_user_auth
+    self.logger.info("***********",getattr(context.Context, 'uid'))
+Message: '***********'
+Arguments: ('100006389',)
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='total_row' class="text-center active">
+    <td>总计</td>
+    <td>46</td>
+    <td>44</td>
+    <td>2</td>
+    <td>0</td>
+    <td>通过率：95.65%</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+</body>
+</html>
